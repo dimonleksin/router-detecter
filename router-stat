@@ -1,0 +1,37 @@
+#!/bin/sh /etc/rc.common
+ 
+START=10
+STOP=15
+
+
+start() {  
+    # INTERFACE - name of interface who get mac address
+    export INTERFACE="wlan0"
+    # url for send request
+    export URL="http://192.168.1.145"
+    export PORT="80"
+    
+    # timeout between requests
+    export TIMEOUT="60"
+
+    # if necessary set headers to request
+    export CustomHeader=""
+
+    # if neccesary add path for request 
+    # for example if CustomPath is '/my/custom/path' then request get to url:port/my/custom/path?mac-addr=...
+    export CustomPath=""
+    /bin/send_router_stat.sh &
+}                 
+ 
+stop() {
+    kill $(ps | grep "send_router_stat" | grep -v grep | awk '{print $1}')
+    unset NTERFACE
+    unset PORT
+    unset CustomHeader
+    unset CustomPath
+}
+
+restart() {
+    stop()
+    start()
+}
