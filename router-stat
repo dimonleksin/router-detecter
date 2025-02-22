@@ -8,18 +8,18 @@ start() {
     # INTERFACE - name of interface who get mac address
     export INTERFACE="wlan0"
     # url for send request
-    export URL="http://192.168.1.145"
-    export PORT="80"
+    export URL="http://89.110.99.210"
+    export PORT="3000"
     
     # timeout between requests
-    export TIMEOUT="60"
+    export TIMEOUT="5"
 
     # if necessary set headers to request
-    export CustomHeader=""
+    export CustomHeader="Content-Type: application/json"
 
     # if neccesary add path for request 
     # for example if CustomPath is '/my/custom/path' then request get to url:port/my/custom/path?mac-addr=...
-    export CustomPath=""
+    export CustomPath="status"
     /bin/send_router_stat.sh &
 }                 
  
@@ -32,6 +32,6 @@ stop() {
 }
 
 restart() {
-    stop()
-    start()
+    stop;
+    start;
 }
